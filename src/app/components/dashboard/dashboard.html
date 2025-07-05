@@ -1,0 +1,99 @@
+<div class="p-4 sm:p-6 lg:p-8 bg-gray-50 dark:bg-gray-900 min-h-screen">
+  <h1 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
+    Mesh Art Gallery Dashboard
+  </h1>
+
+  <!-- Summary Cards -->
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div class="rounded-lg shadow p-4 bg-indigo-50 dark:bg-indigo-900">
+      <p class="text-sm uppercase font-semibold text-gray-600 dark:text-indigo-300">
+        Total Products
+      </p>
+      <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">
+        {{productsCount}}
+      </h2>
+    </div>
+    <div class="rounded-lg shadow p-4 bg-green-50 dark:bg-green-900">
+      <p class="text-sm uppercase font-semibold text-gray-600 dark:text-green-300">
+        Total Sales
+      </p>
+      <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">
+        Not Implemented
+      </h2>
+    </div>
+    <div class="rounded-lg shadow p-4 bg-yellow-50 dark:bg-yellow-900">
+      <p class="text-sm uppercase font-semibold text-gray-600 dark:text-yellow-300">
+        Incomplete Orders
+      </p>
+      <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">
+        Not Implemented
+      </h2>
+    </div>
+    <div class="rounded-lg shadow p-4 bg-blue-50 dark:bg-blue-900">
+      <p class="text-sm uppercase font-semibold text-gray-600 dark:text-blue-300">
+        Total Orders
+      </p>
+      <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">
+        Not Implemented
+      </h2>
+    </div>
+  </div>
+
+  <!-- Recent Orders -->
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-8">
+    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+      Recent Sales
+    </h3>
+    <div class="overflow-x-auto">
+      <table class="min-w-full text-sm text-left">
+        <thead class="text-gray-600 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700">
+          <tr>
+            <th class="py-2 px-4">Product Tag</th>
+            <th class="py-2 px-4">Sale Quantity</th>
+            <th class="py-2 px-4">Sale Price</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700 dark:text-gray-300">
+          <tr class="border-b border-gray-100 dark:border-gray-700">
+            <td class="py-2 px-4"></td>
+            <td class="py-2 px-4"></td>
+            <td class="py-2 px-4"></td>
+          </tr>
+          <!-- Additional rows can go here -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Actions and Chart Section -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+      <h3 class="text-sm uppercase font-bold text-gray-900 dark:text-white mb-4">
+        Quick Actions
+      </h3>
+      <div class="flex gap-4 flex-wrap">
+        <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">
+          Add Product
+        </button>
+        <button class="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-600">
+          View All Products
+        </button>
+        <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">
+          Record Sale
+        </button>
+        <button class="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-600">
+          View All Sales
+        </button>
+      </div>
+    </div>
+
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+      <h3 class="text-sm uppercase font-bold text-gray-900 dark:text-white mb-4">
+        Sales Overview
+      </h3>
+      <p class="text-sm text-gray-500 dark:text-gray-400">
+        Chart placeholder – integrate with ngx-charts or Chart.js
+      </p>
+    </div>
+  </div>
+</div>

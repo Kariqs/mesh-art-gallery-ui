@@ -1,0 +1,22 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable, OnInit } from '@angular/core';
+import { catchError, Observable } from 'rxjs';
+import { ProductInterface } from '../../models/models';
+import { ErrorHandler } from '../../utils/error-handler';
+import { Router } from '@angular/router';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class Product {
+  apiUrl = 'http://localhost:8080/api';
+  constructor(private http: HttpClient, private router: Router) {}
+
+  getProducts(): Observable<{ products: ProductInterface[] }> {
+    return this.http
+      .get<{ products: ProductInterface[] }>(`${this.apiUrl}/product`)
+      .pipe(
+        catchError((error) => ErrorHandler.errorHandler(error, this.router))
+      );
+  }
+}
