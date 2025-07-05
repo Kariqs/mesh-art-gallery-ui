@@ -37,4 +37,8 @@ export class AllProducts implements OnInit {
   onCreateProduct() {
     this.router.navigate(['products', 'new']);
   }
+
+  onUpdateProduct(tag: string) {
+    this.router.navigate(['products', 'update', tag]);
+  }
 }

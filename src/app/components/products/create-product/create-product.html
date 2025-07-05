@@ -1,1 +1,65 @@
-<p>create-product works!</p>
+<div class="flex justify-center items-center min-h-screen bg-transparent px-4 lg:px-8">
+    <div class="w-full max-w-lg bg-white dark:bg-gray-800 rounded-md shadow-md p-6">
+        <h1 class="text-blue-600 dark:text-blue-400 text-2xl font-bold text-center mb-8">
+            {{editMode?"Update Product":"Add New Product"}}
+        </h1>
+
+        <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+            <!-- Name -->
+            <div class="mb-4">
+                <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Product Names
+                    <span class="text-red-600">*</span></label>
+                <input type="text" id="name" formControlName="name"
+                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <div *ngIf="productForm.get('name')?.touched && productForm.get('name')?.invalid"
+                    class="text-red-600 text-sm mt-1">
+                    Name is required
+                </div>
+            </div>
+
+            <!-- Tag -->
+            <div class="mb-4">
+                <label for="tag" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Product
+                    Tag <span class="text-red-600">*</span></label>
+                <input type="text" id="tag" formControlName="tag"
+                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <div *ngIf="productForm.get('tag')?.touched && productForm.get('tag')?.invalid"
+                    class="text-red-600 text-sm mt-1">
+                    Tag is required
+                </div>
+            </div>
+
+            <!-- Price -->
+            <div class="mb-4">
+                <label for="price" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Product
+                    Price <span class="text-red-600">*</span></label>
+                <input type="number" id="price" formControlName="price"
+                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <div *ngIf="productForm.get('price')?.touched && productForm.get('price')?.invalid"
+                    class="text-red-600 text-sm mt-1">
+                    Price is required
+                </div>
+            </div>
+
+            <!-- Quantity -->
+            <div class="mb-4">
+                <label for="quantity" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Product
+                    Quantity <span class="text-red-600">*</span></label>
+                <input type="number" id="quantity" formControlName="quantity" min="0" step="0.01"
+                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <div *ngIf="productForm.get('quantity')?.touched && productForm.get('quantity')?.invalid"
+                    class="text-red-600 text-sm mt-1">
+                    Valid quantity is required
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="flex justify-end">
+                <button type="submit" [disabled]="isSubmitting || productForm.invalid"
+                    class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50">
+                    {{ isSubmitting ? 'Saving...' : 'Save Product' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

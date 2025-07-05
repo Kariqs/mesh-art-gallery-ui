@@ -4,7 +4,7 @@ export interface User {
 }
 
 export interface ProductInterface {
-  ID: number;
+  ID?: number;
   name: string;
   price: number;
   quantity: number;

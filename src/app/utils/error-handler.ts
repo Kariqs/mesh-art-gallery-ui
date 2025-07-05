@@ -6,7 +6,7 @@ import { throwError } from 'rxjs';
 export class ErrorHandler {
   static errorHandler(error: HttpErrorResponse, router: Router) {
     if (error.status === 401) {
-      router.navigate(['auth', 'login']);
+      router.navigate(['auth']);
     }
 
     let errorMsg = 'An unknown error occurred!';

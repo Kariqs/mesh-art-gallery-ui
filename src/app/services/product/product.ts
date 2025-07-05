@@ -5,6 +5,11 @@ import { ProductInterface } from '../../models/models';
 import { ErrorHandler } from '../../utils/error-handler';
 import { Router } from '@angular/router';
 
+interface CreateProductResponse {
+  message: string;
+  product: ProductInterface;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -12,9 +17,26 @@ export class Product {
   apiUrl = 'http://localhost:8080/api';
   constructor(private http: HttpClient, private router: Router) {}
 
+  createProduct(
+    productInfo: ProductInterface
+  ): Observable<CreateProductResponse> {
+    return this.http.post<CreateProductResponse>(
+      `${this.apiUrl}/product`,
+      productInfo
+    );
+  }
+
   getProducts(): Observable<{ products: ProductInterface[] }> {
     return this.http
       .get<{ products: ProductInterface[] }>(`${this.apiUrl}/product`)
+      .pipe(
+        catchError((error) => ErrorHandler.errorHandler(error, this.router))
+      );
+  }
+
+  getProductByTag(tag: string): Observable<{ product: ProductInterface }> {
+    return this.http
+      .get<{ product: ProductInterface }>(`${this.apiUrl}/product/${tag}`)
       .pipe(
         catchError((error) => ErrorHandler.errorHandler(error, this.router))
       );

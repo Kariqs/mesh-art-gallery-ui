@@ -16,6 +16,7 @@ export const routes: Routes = [
     children: [
       { path: '', component: AllProducts },
       { path: 'new', component: CreateProduct },
+      { path: 'update/:tag', component: CreateProduct },
     ],
   },
   { path: 'sales', component: Sales, title: 'Sales Manager' },
