@@ -86,25 +86,53 @@ export class CreateProduct implements OnInit {
 
     const productInfo: ProductInterface = this.productForm.value;
 
-    this.productService.createProduct(productInfo).subscribe({
-      next: (response) => {
-        if (response) {
+    if (this.editMode) {
+      if (this.productTag) {
+        this.productService
+          .updateProduct(this.productTag, productInfo)
+          .subscribe({
+            next: (response) => {
+              if (response) {
+                this.isSubmitting = false;
+                this.toaster.info(response.message.toUpperCase());
+                this.router.navigate(['products']);
+              } else {
+                this.toaster.error('An unknown error occured'.toUpperCase());
+              }
+            },
+            error: (err) => {
+              this.isSubmitting = false;
+              let errorMessage = 'An unknown error occured';
+              if (err.message) {
+                errorMessage = err.error.message;
+              }
+              this.toaster.error(errorMessage.toUpperCase());
+            },
+          });
+      } else {
+        this.toaster.error('No product  tag'.toUpperCase());
+      }
+    } else {
+      this.productService.createProduct(productInfo).subscribe({
+        next: (response) => {
+          if (response) {
+            this.isSubmitting = false;
+            this.toaster.info(response.message.toUpperCase());
+            this.router.navigate(['products']);
+          } else {
+            this.toaster.error('An unknown error occured'.toUpperCase());
+          }
+        },
+        error: (err) => {
           this.isSubmitting = false;
-          this.toaster.info(response.message.toUpperCase());
-          this.router.navigate(['products']);
-        } else {
-          this.toaster.error('An unknown error occured'.toUpperCase());
-        }
-      },
-      error: (err) => {
-        this.isSubmitting = false;
 
-        let errorMessage = 'An unknown error occured';
-        if (err.message) {
-          errorMessage = err.error.message;
-        }
-        this.toaster.error(errorMessage.toUpperCase());
-      },
-    });
+          let errorMessage = 'An unknown error occured';
+          if (err.message) {
+            errorMessage = err.error.message;
+          }
+          this.toaster.error(errorMessage.toUpperCase());
+        },
+      });
+    }
   }
 }
