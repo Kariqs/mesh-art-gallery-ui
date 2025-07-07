@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../services/product/product';
 import { ProductInterface } from '../../models/models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +12,7 @@ import { ProductInterface } from '../../models/models';
 })
 export class Dashboard implements OnInit {
   productsCount!: number;
-  constructor(private productService: Product) {}
+  constructor(private productService: Product, private router: Router) {}
 
   ngOnInit(): void {
     this.getProducts();
@@ -26,5 +27,12 @@ export class Dashboard implements OnInit {
         console.log(err.error);
       },
     });
+  }
+
+  onViewAllProducts() {
+    this.router.navigate(['products']);
+  }
+  onAddProduct() {
+    this.router.navigate(['products', 'new']);
   }
 }

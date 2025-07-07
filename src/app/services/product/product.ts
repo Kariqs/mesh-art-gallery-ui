@@ -14,7 +14,7 @@ interface CreateProductResponse {
   providedIn: 'root',
 })
 export class Product {
-  apiUrl = 'http://localhost:8080/api/product';
+  apiUrl = 'https://mesh-art-gallery-api-production.up.railway.app/api/product';
   constructor(private http: HttpClient, private router: Router) {}
 
   createProduct(
