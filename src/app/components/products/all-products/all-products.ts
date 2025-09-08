@@ -6,10 +6,11 @@ import { ProductInterface } from '../../../models/models';
 import { AppModal } from '../../shared/app-modal/app-modal';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmationModal } from '../../shared/confirmation-modal/confirmation-modal';
+import { ProductCard } from "../../shared/product-card/product-card";
 
 @Component({
   selector: 'app-all-products',
-  imports: [CommonModule, AppModal, ConfirmationModal],
+  imports: [CommonModule, AppModal, ConfirmationModal, ProductCard],
   templateUrl: './all-products.html',
   styleUrl: './all-products.css',
 })

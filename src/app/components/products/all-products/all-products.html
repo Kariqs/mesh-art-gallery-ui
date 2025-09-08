@@ -1,96 +1,41 @@
 <div class="w-full px-4 lg:px-8">
-    <div class="max-w-7xl mx-auto">
-        <div class="flex p-2 justify-end items-center">
-            <button
-                class="p-2 bg-violet-600 text-white rounded-sm font-semibold uppercase hover:bg-violet-700 transition dark:bg-violet-500 dark:hover:bg-violet-600"
-                (click)="onCreateProduct()">
-                Create Product
-            </button>
-        </div>
+  <div class="max-w-7xl mx-auto">
+    <div class="flex p-2 justify-end items-center">
+      <button
+        class="p-2 bg-violet-600 text-white rounded-sm font-semibold uppercase hover:bg-violet-700 transition dark:bg-violet-500 dark:hover:bg-violet-600"
+        (click)="onCreateProduct()">
+        Create Product
+      </button>
     </div>
+  </div>
 
-    <!-- Loading Spinner Modal -->
-    <app-app-modal *ngIf="status === 'loading'" [message]="'Loading Products'"></app-app-modal>
+  <!-- Loading Spinner Modal -->
+  @if (status==='loading') {
+  <app-app-modal [message]="'Loading Products'"></app-app-modal>
+  }
 
-    <!-- Success Content -->
-    <ng-container *ngIf="status === 'success'">
-        <!-- Table -->
-        <div *ngIf="products.length > 0" class="w-full overflow-x-auto">
-            <div class="min-w-full lg:max-w-7xl mx-auto">
-                <table class="w-full bg-white dark:bg-gray-800 rounded-lg shadow-sm">
-                    <thead class="bg-violet-600 dark:bg-violet-500">
-                        <tr>
-                            <th class="px-4 py-2 text-left text-xs font-semibold text-white uppercase tracking-wider">ID
-                            </th>
-                            <th class="px-4 py-2 text-left text-xs font-semibold text-white uppercase tracking-wider">
-                                Name</th>
-                            <th class="px-4 py-2 text-left text-xs font-semibold text-white uppercase tracking-wider">
-                                Tag</th>
-                            <th class="px-4 py-2 text-left text-xs font-semibold text-white uppercase tracking-wider">
-                                Price</th>
-                            <th class="px-4 py-2 text-left text-xs font-semibold text-white uppercase tracking-wider">
-                                Remaining Pieces</th>
-                            <th class="px-4 py-2 text-left text-xs font-semibold text-white uppercase tracking-wider">
-                                Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-                        <tr *ngFor="let product of products"
-                            class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">{{
-                                product.ID || 'N/A' }}</td>
-                            <td class="px-4 py-2 whitespace-nowrap">
-                                <div class="text-sm font-medium text-gray-700 dark:text-gray-100">{{ product.name }}
-                                </div>
-                            </td>
-                            <td class="px-4 py-2 whitespace-nowrap">
-                                <div class="text-sm font-medium text-gray-700 dark:text-gray-100">{{ product.tag }}
-                                </div>
-                            </td>
-                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">{{
-                                product.price }}</td>
-                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">{{
-                                product.quantity }}</td>
-                            <td
-                                class="px-4 py-2 flex flex-row flex-nowrap gap-2 items-center overflow-auto text-sm text-gray-600 dark:text-gray-300">
-                                <button (click)="onUpdateProduct(product.tag)"
-                                    class="p-2 rounded-sm bg-amber-500 text-white font-semibold uppercase hover:bg-amber-600 transition dark:bg-amber-400 dark:hover:bg-amber-500">
-                                    Update
-                                </button>
-                                <button (click)="openConfirm(product.tag)"
-                                    class="p-2 rounded-sm bg-rose-500 text-white font-semibold uppercase hover:bg-rose-600 transition dark:bg-rose-400 dark:hover:bg-rose-500">
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+  <!-- Success Content -->
+  @if (status === 'success') {
+  <ng-container>
+    <!-- Table -->
+    @if (products.length > 0) {
+    <div class="w-full overflow-x-auto">
+      <div class="min-w-full lg:max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          @for (product of products; track $index) {
+          <app-product-card [product]="product"></app-product-card>
+          }
         </div>
+      </div>
+    </div>
+    }
+  </ng-container>
+  }
 
-        <!-- No Products Found -->
-        <div *ngIf="products.length === 0" class="w-full px-4 lg:px-8 mt-10">
-            <div
-                class="max-w-3xl mx-auto bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-md flex flex-col items-center justify-center text-center">
-                <svg class="h-12 w-12 text-indigo-600 dark:text-indigo-400 mb-4" xmlns="http://www.w3.org/2000/svg"
-                    fill="none" viewBox="0 0 24 24">
-                    <path stroke="currentColor" stroke-width="2"
-                        d="M9 17v-2a4 4 0 014-4h4m0 0V7m0 4l-4-4m4 4l4-4M4 4v16h16" />
-                </svg>
-                <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">No Products Found</h2>
-                <p class="text-gray-600 dark:text-gray-400 mb-4">It looks like there are no products in the system yet.
-                </p>
-                <button (click)="onCreateProduct()"
-                    class="px-4 py-2 bg-violet-600 text-white rounded-md font-semibold uppercase hover:bg-violet-700 transition dark:bg-violet-500 dark:hover:bg-violet-600">
-                    Create Product
-                </button>
-            </div>
-        </div>
-    </ng-container>
-
-    <!-- Confirmation Modal -->
-    <app-confirmation-modal *ngIf="showConfirmModal" [title]="'Delete Product'"
-        [message]="'Are you sure you want to delete this product?'" (confirm)="handleConfirm(selectedProductTag!)"
-        (cancel)="handleCancel()">
-    </app-confirmation-modal>
+  <!-- Confirmation Modal -->
+  @if (showConfirmModal) {
+  <app-confirmation-modal [title]="'Delete Product'" [message]="'Are you sure you want to delete this product?'"
+    (confirm)="handleConfirm(selectedProductTag!)" (cancel)="handleCancel()">
+  </app-confirmation-modal>
+  }
 </div>

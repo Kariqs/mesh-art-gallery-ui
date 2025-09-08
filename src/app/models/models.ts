@@ -11,8 +11,9 @@ export interface ProductInterface {
   tag: string;
 }
 
-export interface Sale {
-  productTag: string;
+
+export interface SaleInfo {
+  productId: string;
   saleQuantity: string;
   salePrice: number;
 }
